@@ -72,13 +72,58 @@ fun HeaderFooter(){
         Album(
             title = "Subzero Baby",
             image = R.drawable.album
+        ),
+        Album(
+            title = "The Blueprint",
+            image = R.drawable.album
+        ),
+        Album(
+            title = "Exodus",
+            image = R.drawable.album
+        ),
+        Album(
+            title = "Graceland",
+            image = R.drawable.album
+        ),
+        Album(
+            title = "Ok Computer",
+            image = R.drawable.album
+        ),
+        Album(
+            title = "Let it bleed",
+            image = R.drawable.album
         )
     )
     val listOFSongs = listOf<Song>(
         Song(
             title = "Lil Baby-Pure Cocan",
             image = R.drawable.music_note
-        )
+        ),
+        Song(
+            title = "Gata Only - FloyyMenor and Cris M",
+            image = R.drawable.music_note
+        ),
+        Song(
+            title = "Nasty - Tinashe",
+            image = R.drawable.music_note
+        ),
+        Song(
+            title = "MILLION DOLLAR BABY (VHS) - Tommy Richman",
+            image = R.drawable.music_note
+        ),
+        Song(
+            title = "BIRDS OF A FEATHER - Billie Eilish",
+            image = R.drawable.music_note
+        ),
+        Song(
+            title = "Please Please Please - Sabrina Carpenter",
+            image = R.drawable.music_note
+        ),
+        Song(
+            title = "ESTE - El Alfa, Nfasis",
+            image = R.drawable.music_note
+        ),
+
     )
     Scaffold(
         topBar = {
