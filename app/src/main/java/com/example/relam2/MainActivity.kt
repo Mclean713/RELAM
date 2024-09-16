@@ -94,7 +94,6 @@ fun HeaderFooter(){
             image = R.drawable.album
         )
     )
-
     val listOFSongs = listOf<Song>(
         Song(
             title = "Lil Baby-Pure Cocan",
