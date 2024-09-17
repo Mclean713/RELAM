@@ -69,32 +69,32 @@ fun HeaderFooter(){
     var TrendingList by remember {
         mutableStateOf(false)
     }
-    val image = R.drawable.album
+    val Albumimage = R.drawable.album
     val SongImage = R.drawable.music_note
     val listOFAlbums = listOf<Album>(
         Album(
             title = "Subzero Baby",
-            image = image
+            image = Albumimage
         ),
         Album(
             title = "The Blueprint",
-            image = image
+            image = Albumimage
         ),
         Album(
             title = "Exodus",
-            image = image
+            image = Albumimage
         ),
         Album(
             title = "Graceland",
-            image = image
+            image = Albumimage
         ),
         Album(
             title = "Ok Computer",
-            image = image
+            image = Albumimage
         ),
         Album(
             title = "Let it bleed",
-            image = image
+            image = Albumimage
         )
     )
     val listOFSongs = listOf<Song>(
