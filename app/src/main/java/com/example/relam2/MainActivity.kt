@@ -41,6 +41,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -68,74 +69,75 @@ fun HeaderFooter(){
     var TrendingList by remember {
         mutableStateOf(false)
     }
+    val image = R.drawable.album
+    val SongImage = R.drawable.music_note
     val listOFAlbums = listOf<Album>(
         Album(
             title = "Subzero Baby",
-            image = R.drawable.album
+            image = image
         ),
         Album(
             title = "The Blueprint",
-            image = R.drawable.album
+            image = image
         ),
         Album(
             title = "Exodus",
-            image = R.drawable.album
+            image = image
         ),
         Album(
             title = "Graceland",
-            image = R.drawable.album
+            image = image
         ),
         Album(
             title = "Ok Computer",
-            image = R.drawable.album
+            image = image
         ),
         Album(
             title = "Let it bleed",
-            image = R.drawable.album
+            image = image
         )
     )
     val listOFSongs = listOf<Song>(
         Song(
             title = "Lil Baby-Pure Cocan",
-            image = R.drawable.music_note
+            image = SongImage
         ),
         Song(
             title = "Gata Only - FloyyMenor and Cris M",
-            image = R.drawable.music_note
+            image = SongImage
         ),
         Song(
             title = "Nasty - Tinashe",
-            image = R.drawable.music_note
+            image = SongImage
         ),
         Song(
             title = "MILLION DOLLAR BABY (VHS) - Tommy Richman",
-            image = R.drawable.music_note
+            image = SongImage
         ),
         Song(
             title = "BIRDS OF A FEATHER - Billie Eilish",
-            image = R.drawable.music_note
+            image = SongImage
         ),
         Song(
             title = "Please Please Please - Sabrina Carpenter",
-            image = R.drawable.music_note
+            image = SongImage
         ),
         Song(
             title = "ESTE - El Alfa, Nfasis",
-            image = R.drawable.music_note
+            image = SongImage
         ),
 
     )
     Scaffold(
         topBar = {
             NavigationBar {
-                Icon(imageVector = Icons.Outlined.Search, contentDescription = null)
+                     VectorImageTop(Icons.Outlined.Search)
                 Row (
                     horizontalArrangement = Arrangement.End,
                     modifier = Modifier.fillMaxWidth()
                 ){
-
-                    Icon(imageVector = Icons.Outlined.Notifications, contentDescription = null)
-                    Icon(imageVector = Icons.Outlined.Settings, contentDescription = null)
+                    VectorImageTop(Icons.Outlined.Notifications)
+                    VectorImageTop(Icons.Outlined.Settings)
                 }
             }
         },
@@ -145,21 +147,10 @@ fun HeaderFooter(){
                     horizontalArrangement = Arrangement.Center,
                     modifier = Modifier.fillMaxWidth()
                 ){
-                    Icon(
-                        imageVector = Icons.Outlined.Home,
-                        contentDescription = null,
-                        modifier = Modifier.padding(horizontal =30.dp)
-                    )
-                    Icon(
-                        imageVector = Icons.Outlined.FavoriteBorder,
-                        contentDescription = null,
-                        modifier = Modifier.padding(horizontal =30.dp)
-                    )
-                    Icon(
-                        imageVector = Icons.Outlined.AccountCircle,
-                        contentDescription = null,
-                        modifier = Modifier.padding(horizontal =30.dp)
-                    )
+                    ImageVectorBottom(Icons.Outlined.Home)
+                    ImageVectorBottom(Icons.Outlined.FavoriteBorder)
+                    ImageVectorBottom(Icons.Outlined.AccountCircle)
+
                 }
             }
         }
@@ -324,6 +315,19 @@ fun HeaderFooter(){
         }
     }
 }
+@Composable
+fun VectorImageTop(icon: ImageVector){
+    Icon(imageVector = icon, contentDescription = null)
+}
+@Composable
+fun ImageVectorBottom(icon: ImageVector){
+    Icon(
+        imageVector = icon,
+        contentDescription = null,
+        modifier = Modifier.padding(horizontal =30.dp)
+    )
+}
+
 data class Album(
     val title: String,
     val image:Int
