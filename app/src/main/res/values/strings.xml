@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">Relam2</string>
+    <string name="subzero_baby">Subzero Baby</string>
+    <string name="lil_baby">Lil Baby</string>
+    <string name="monkey_dance">Monkey dance</string>
+    <string name="tones_and_i">Tones and I</string>
+    <string name="dior">Dior</string>
+    <string name="pop_smoke">Pop Smoke</string>
+    <string name="unstopable">Unstopable</string>
+    <string name="sia">Sia</string>
+    <string name="bank_account">Bank Account</string>
+    <string name="_21_savage">21 Savage</string>
+    <string name="rockstar">RockStar</string>
+    <string name="_21_savage_ft_post_m">21 Savage ft Post M</string>
+    <string name="home">Home</string>
+    <string name="favourite">Favourite</string>
+    <string name="settings">Settings</string>
+    <string name="acoount">Acoount</string>
+    <string name="search">Search</string>
+    <string name="hope">Hope</string>
+    <string name="nf">NF</string>
+    <string name="uthingo_le">Uthingo le</string>
+    <string name="nkosazana_daughter">Nkosazana Daughter</string>
 </resources>

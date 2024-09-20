@@ -5,21 +5,35 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateColor
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Home
@@ -42,13 +56,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.InfiniteAnimationPolicy
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.relam2.data.icons
+import com.example.relam2.ui.components.Albumcard
+import com.example.relam2.ui.components.listAlbums
+import com.example.relam2.ui.components.listSong
 import com.example.relam2.ui.theme.Relam2Theme
 
 class MainActivity : ComponentActivity() {
@@ -69,75 +90,25 @@ fun HeaderFooter(){
     var TrendingList by remember {
         mutableStateOf(false)
     }
-    val Albumimage = R.drawable.album
-    val SongImage = R.drawable.music_note
-    val listOFAlbums = listOf<Album>(
-        Album(
-            title = "Subzero Baby",
-            image = Albumimage
+    val transition = rememberInfiniteTransition()
+    val color by transition.animateColor(
+        initialValue = Color.Gray,
+        targetValue = Color.LightGray,
+        animationSpec = infiniteRepeatable(
+            animation = tween(7000),
+            repeatMode = RepeatMode.Reverse
         ),
-        Album(
-            title = "The Blueprint",
-            image = Albumimage
-        ),
-        Album(
-            title = "Exodus",
-            image = Albumimage
-        ),
-        Album(
-            title = "Graceland",
-            image = Albumimage
-        ),
-        Album(
-            title = "Ok Computer",
-            image = Albumimage
-        ),
-        Album(
-            title = "Let it bleed",
-            image = Albumimage
-        )
+        label = ""
     )
-    val listOFSongs = listOf<Song>(
-        Song(
-            title = "Lil Baby-Pure Cocan",
-            image = SongImage
-        ),
-        Song(
-            title = "Gata Only - FloyyMenor and Cris M",
-            image = SongImage
-        ),
-        Song(
-            title = "Nasty - Tinashe",
-            image = SongImage
-        ),
-        Song(
-            title = "MILLION DOLLAR BABY (VHS) - Tommy Richman",
-            image = SongImage
-        ),
-        Song(
-            title = "BIRDS OF A FEATHER - Billie Eilish",
-            image = SongImage
-        ),
-        Song(
-            title = "Please Please Please - Sabrina Carpenter",
-            image = SongImage
-        ),
-        Song(
-            title = "ESTE - El Alfa, Nfasis",
-            image = SongImage
-        ),
 
-    )
     Scaffold(
         topBar = {
             NavigationBar {
-                     VectorImageTop(Icons.Outlined.Search)
                 Row (
                     horizontalArrangement = Arrangement.End,
                     modifier = Modifier.fillMaxWidth()
                 ){
-                    VectorImageTop(Icons.Outlined.Notifications)
-                    VectorImageTop(Icons.Outlined.Settings)
+                    VectorImageTop(Icons.Filled.Notifications)
                 }
             }
         },
@@ -147,9 +118,7 @@ fun HeaderFooter(){
                     horizontalArrangement = Arrangement.Center,
                     modifier = Modifier.fillMaxWidth()
                 ){
-                    ImageVectorBottom(Icons.Outlined.Home)
-                    ImageVectorBottom(Icons.Outlined.FavoriteBorder)
-                    ImageVectorBottom(Icons.Outlined.AccountCircle)
+                    ListOfIcons()
 
                 }
             }
@@ -161,7 +130,7 @@ fun HeaderFooter(){
 
         ){
             Row (
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth().background(color)
 
             ){
                 Button(
@@ -191,7 +160,7 @@ fun HeaderFooter(){
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(Color.White)
+                        .background(color)
                 ){
                     Column {
                         Text(
@@ -204,46 +173,7 @@ fun HeaderFooter(){
                                 .fillMaxWidth()
                                 .padding(vertical = 10.dp)
                         )
-                        LazyColumn {
-                            items(listOFAlbums){item ->
-
-                                OutlinedCard(
-                                    shape = RectangleShape,
-                                    modifier = Modifier
-                                        .height(70.dp)
-                                        .fillMaxWidth()
-                                ) {
-                                    Row {
-                                        Image(
-                                            painter = painterResource(id = item.image),
-                                            contentDescription = null,
-                                            modifier = Modifier.size(70.dp)
-                                        )
-                                        Text(
-                                            text = "${item.title}",
-                                            fontSize = 17.sp,
-                                            modifier = Modifier
-                                                .padding(vertical = 25.dp)
-                                                .padding(horizontal = 20.dp)
-                                        )
-
-                                        Row (
-                                            horizontalArrangement = Arrangement.End,
-                                            modifier = Modifier.fillMaxWidth()
-                                        ){
-                                            Icon(
-                                                imageVector = Icons.Filled.MoreVert,
-                                                contentDescription = null,
-                                                modifier = Modifier
-                                                    .padding(vertical = 25.dp)
-                                            )
-                                        }
-                                    }
-                                }
-
-
-                            }
-                        }
+                        listAlbums()
                     }
                 }
             }
@@ -253,7 +183,7 @@ fun HeaderFooter(){
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(Color.White)
+                        .background(color)
                 ){
                     Column {
                         Text(
@@ -266,46 +196,7 @@ fun HeaderFooter(){
                                 .fillMaxWidth()
                                 .padding(vertical = 10.dp)
                         )
-                        LazyColumn {
-                            items(listOFSongs) { item ->
-                                OutlinedCard(
-                                    shape = RectangleShape,
-                                    modifier = Modifier
-                                        .height(70.dp)
-                                        .fillMaxWidth()
-                                ) {
-                                    Row (
-                                        verticalAlignment = Alignment.CenterVertically,
-                                        modifier = Modifier.fillMaxWidth()
-                                    ){
-                                        Image(
-                                            painter = painterResource(id = item.image),
-                                            contentDescription = null,
-                                            modifier = Modifier.size(30.dp)
-                                        )
-                                        Text(
-                                            text = "${item.title}",
-                                            fontSize = 17.sp,
-                                            modifier = Modifier
-                                                .padding(vertical = 25.dp)
-                                                .padding(horizontal = 20.dp)
-                                        )
-
-                                        Row(
-                                            horizontalArrangement = Arrangement.End,
-                                            modifier = Modifier.fillMaxWidth()
-                                        ) {
-                                            Icon(
-                                                imageVector = Icons.Filled.MoreVert,
-                                                contentDescription = null,
-                                                modifier = Modifier
-                                                    .padding(vertical = 25.dp)
-                                            )
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        listSong()
                     }
 
                 }
@@ -315,6 +206,47 @@ fun HeaderFooter(){
         }
     }
 }
+@Composable
+fun ListOfIcons(){
+    val IconList = listOf(
+        icons(
+            label = R.string.home,
+            icon = Icons.Filled.Home
+        ),
+        icons(
+            label = R.string.favourite,
+            icon = Icons.Filled.Favorite
+        ),
+        icons(
+            label = R.string.search,
+            icon = Icons.Filled.Search
+        ),
+        icons(
+            label = R.string.acoount,
+            icon = Icons.Filled.AccountCircle
+        )
+
+    )
+    LazyRow {
+        items(IconList){ item ->
+            Column(
+                modifier = Modifier.padding(horizontal = 25.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Icon(
+                    imageVector = item.icon,
+                    contentDescription = null,)
+                Text(
+                    text = LocalContext.current.getString(item.label),
+                    fontWeight = FontWeight.Bold
+                )
+
+            }
+        }
+    }
+
+}
+
 @Composable
 fun VectorImageTop(icon: ImageVector){
     Icon(imageVector = icon, contentDescription = null)
@@ -328,13 +260,5 @@ fun ImageVectorBottom(icon: ImageVector){
     )
 }
 
-data class Album(
-    val title: String,
-    val image:Int
-)
-data class Song(
-    val title: String,
-    val image:Int
-)
 
 
