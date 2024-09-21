@@ -35,22 +35,11 @@ import com.example.relam2.data.Album
 @Composable
 fun Albumcard(album: Album){
 
-    val transition = rememberInfiniteTransition()
-    val color by transition.animateColor(
-        initialValue = Color.Gray,
-        targetValue = Color.LightGray,
-        animationSpec = infiniteRepeatable(
-            animation = tween(6000),
-            repeatMode = RepeatMode.Reverse
-        ),
-        label = ""
-    )
-
 
     OutlinedCard (
         modifier = Modifier.size(220.dp).padding(10.dp),
         colors = CardDefaults.cardColors(
-            color
+            Color.White
         )
     ) {
       Image(

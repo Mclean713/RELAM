@@ -51,10 +51,10 @@ fun SongCard(song: Song){
 
     val transition = rememberInfiniteTransition()
     val color by transition.animateColor(
-        initialValue = Color.Gray,
-        targetValue = Color.LightGray,
+        initialValue = Color.LightGray,
+        targetValue = Color.White,
         animationSpec = infiniteRepeatable(
-            animation = tween(6000),
+            animation = tween(5000),
             repeatMode = RepeatMode.Reverse
         ),
         label = ""

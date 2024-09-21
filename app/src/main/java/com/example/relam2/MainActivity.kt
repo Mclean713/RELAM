@@ -31,6 +31,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Search
@@ -85,30 +86,32 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun HeaderFooter(){
     var AlbumList by remember {
-        mutableStateOf(true)
-    }
-    var TrendingList by remember {
         mutableStateOf(false)
     }
-    val transition = rememberInfiniteTransition()
-    val color by transition.animateColor(
-        initialValue = Color.Gray,
-        targetValue = Color.LightGray,
-        animationSpec = infiniteRepeatable(
-            animation = tween(7000),
-            repeatMode = RepeatMode.Reverse
-        ),
-        label = ""
-    )
+    var TrendingList by remember {
+        mutableStateOf(true)
+    }
 
     Scaffold(
         topBar = {
             NavigationBar {
-                Row (
-                    horizontalArrangement = Arrangement.End,
-                    modifier = Modifier.fillMaxWidth()
-                ){
-                    VectorImageTop(Icons.Filled.Notifications)
+                Row {
+                    VectorImageTop(Icons.Filled.Menu)
+                    Spacer(modifier = Modifier.width(40.dp))
+                    Text(
+                        text = "RELAM",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 20.sp,
+                        modifier = Modifier.padding(vertical = 20.dp)
+                    )
+
+                    Row(
+                        horizontalArrangement = Arrangement.End,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+
+                        VectorImageTop(Icons.Filled.Notifications)
+                    }
                 }
             }
         },
@@ -130,7 +133,9 @@ fun HeaderFooter(){
 
         ){
             Row (
-                modifier = Modifier.fillMaxWidth().background(color)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.Gray)
 
             ){
                 Button(
@@ -160,7 +165,7 @@ fun HeaderFooter(){
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(color)
+                        .background(Color.White)
                 ){
                     Column {
                         Text(
@@ -183,7 +188,7 @@ fun HeaderFooter(){
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(color)
+                        .background(Color.Gray)
                 ){
                     Column {
                         Text(
@@ -249,7 +254,11 @@ fun ListOfIcons(){
 
 @Composable
 fun VectorImageTop(icon: ImageVector){
-    Icon(imageVector = icon, contentDescription = null)
+    Icon(
+        imageVector = icon,
+        contentDescription = null,
+        modifier = Modifier.padding(20.dp)
+        )
 }
 
 
