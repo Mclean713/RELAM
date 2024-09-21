@@ -47,14 +47,14 @@ import com.example.relam2.data.Album
 import com.example.relam2.data.Song
 
 @Composable
-fun SongCard(image: Int,title: Int,artist:Int){
+fun SongCard(song: Song){
 
     val transition = rememberInfiniteTransition()
     val color by transition.animateColor(
         initialValue = Color.Gray,
         targetValue = Color.LightGray,
         animationSpec = infiniteRepeatable(
-            animation = tween(7000),
+            animation = tween(6000),
             repeatMode = RepeatMode.Reverse
         ),
         label = ""
@@ -77,7 +77,7 @@ fun SongCard(image: Int,title: Int,artist:Int){
                     .padding(6.dp)
             ){
               Image(
-                  painter = painterResource(id = image),
+                  painter = painterResource(id = song.artwork),
                   contentScale = ContentScale.Crop,
                   contentDescription = null,
                   modifier = Modifier.size(100.dp)
@@ -88,12 +88,12 @@ fun SongCard(image: Int,title: Int,artist:Int){
                 modifier = Modifier.padding(vertical = 20.dp)
             ) {
                 Text(
-                    text = LocalContext.current.getString(title),
+                    text = LocalContext.current.getString(song.title),
                     fontWeight = FontWeight.Bold,
                     fontSize = 18.sp
                 )
                 Text(
-                    text = LocalContext.current.getString(artist),
+                    text = LocalContext.current.getString(song.artist),
                     fontFamily = FontFamily.Cursive,
                     fontSize = 18.sp
                 )
@@ -123,7 +123,7 @@ fun LazyListSong(list : List<Song>){
 
     LazyColumn {
         items(list){ item ->
-            SongCard(image = item.artwork, title = item.title, artist = item.artist)
+            SongCard(item)
         }
     }
 

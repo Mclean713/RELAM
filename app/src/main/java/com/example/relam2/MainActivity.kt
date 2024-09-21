@@ -251,14 +251,6 @@ fun ListOfIcons(){
 fun VectorImageTop(icon: ImageVector){
     Icon(imageVector = icon, contentDescription = null)
 }
-@Composable
-fun ImageVectorBottom(icon: ImageVector){
-    Icon(
-        imageVector = icon,
-        contentDescription = null,
-        modifier = Modifier.padding(horizontal =30.dp)
-    )
-}
 
 
 
